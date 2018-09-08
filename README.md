@@ -1,2 +1,2 @@
-# ds
-Data Science course at Coursera
+# Data Science course at Coursera
+## by Allan Avendaño
