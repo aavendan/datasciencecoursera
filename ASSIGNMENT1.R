@@ -1,15 +1,34 @@
 pollutantmean <- function(directory, pollutant, id=1:332) {
-  result <- 0
-  files <- list.files(directory)
-  files = c("001.csv")
-  for(file in files) {
-    data = read.csv(paste(directory,file,sep = "/"), header = TRUE)
-    column = data[,pollutant]
-    condition = complete.cases(column)
-    result = result + sum(column[condition])
+  total <- 0
+  cont <- 0
+  
+  for(i in id) {
+    
+    number <- toString(i)
+    zeros <- paste(rep("0",(3-nchar(number))), collapse = "")
+    name <- paste(zeros, number,".csv",sep = "")
+    
+    file_name <- paste(directory,name,sep = "/")
+    
+    data <- read.csv(file_name, header = TRUE)
+    column <- data[,pollutant]
+    condition <- complete.cases(column)
+    
+    total <- total + sum(column[condition])
+    cont <- cont + length(column[condition])
+    
+    #print(file_name)
+    #print(total)
+    #print(cont)
+    
   }
-  avg = result / length(id)
-  print(avg)
+  
+  total / cont
 }
 
-pollutantmean("specdata", "sulfate", 1:10)
+res <- pollutantmean("specdata", "sulfate", 1:10)
+print(res)
+res <- pollutantmean("specdata", "nitrate", 70:72)
+print(res)
+res <- pollutantmean("specdata", "nitrate", 23)
+print(res)
