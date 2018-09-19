@@ -55,3 +55,33 @@ complete("specdata", 1)
 complete("specdata", c(2, 4, 8, 10, 12))
 complete("specdata", 30:25)
 complete("specdata", 3)
+
+corr <- function(directory, threshold = 0) {
+  files <- list.files(directory)
+  correlations <- c()
+  for(file in files){
+    data <- read.csv(paste(directory,file, sep = "/"))
+    data <- data[complete.cases(data), ]
+    if(nrow(data) > threshold) {
+      result <- cor(data$sulfate, data$nitrate)
+      correlations <- c(correlations, result)
+    }
+  }
+  correlations
+}
+
+cr <- corr("specdata", 150)
+print(head(cr))
+print(summary(cr))
+
+cr <- corr("specdata", 400)
+print(head(cr))
+print(summary(cr))
+
+cr <- corr("specdata", 5000)
+print(summary(cr))
+print(length(cr))
+
+cr <- corr("specdata")
+print(summary(cr))
+print(length(cr))
