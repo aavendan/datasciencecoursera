@@ -1,5 +1,5 @@
 # Data Science course at Coursera
 ## Allan Avendaño
 
-* Topic 1
-* Topic 2
+* ASSIGNMENT1: ASSIGNMENT1.R 
+* ASSIGNMENT2: cachematrix.R
